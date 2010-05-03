@@ -22,7 +22,7 @@ foreach my $package (@installed_kernels) {
 
 @victims = sort @victims;
 
-# Spare the most recent two versions
+# Spare the two most recent kernel versions
 print "Retaining the two most recent kernel versions:\n";
 for (1..2) {
     print pop @victims, ' ';
@@ -39,4 +39,10 @@ foreach my $victim (@victims) {
 }
 print "\n";
 
-system "sudo aptitude purge @uninstall";
+if (@uninstall) {
+    system "sudo aptitude purge @uninstall";
+} else {
+    print "Nothing to remove\n";
+}
+
+
