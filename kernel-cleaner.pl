@@ -42,4 +42,3 @@ if (@uninstall) {
     print "Nothing to remove\n";
 }
 
-
