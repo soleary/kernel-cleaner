@@ -11,9 +11,6 @@ my @installed_kernels = split /\n/, qx/$list_command/;
 # Should be fine until Linux 100.x
 my $version_regex = qr/^linux.+(\d{1,2}\.\d{1,2}\.\d{1,2}-\d{1,3})/;
 
-use Data::Dumper;
-print Dumper \@installed_kernels;
-
 my @victims;
 
 foreach my $package (@installed_kernels) {
