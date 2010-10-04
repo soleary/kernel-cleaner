@@ -8,8 +8,7 @@ my $victim_command = 'dpkg --get-selections | grep install | grep linux | grep %
 
 my @installed_kernels = split /\n/, qx/$list_command/;
 
-# Should be fine until Linux 100.x
-my $version_regex = qr/^linux.+(\d{1,2}\.\d{1,2}\.\d{1,2}-\d{1,3})/;
+my $version_regex = qr/^linux.+(\d+\.\d+\.\d+-\d+)/;
 
 my @victims;
 
@@ -26,19 +25,19 @@ for (1..2) {
 }
 print "\n";
 
-print "Preparing to remove the following kernel versions:\n";
 my @uninstall;
 foreach my $victim (@victims) {
-    print $victim, ' ';
     my $cmd = sprintf $victim_command, $victim;
     my @packages = split /\n/, qx/$cmd/;
     push @uninstall, @packages;
 }
-print "\n";
 
 if (@uninstall) {
+    print "Preparing to remove the following kernel versions:\n";
+    print join ' ', @victims;
+    print "\n";
     system "sudo aptitude purge @uninstall";
 } else {
-    print "Nothing to remove\n";
+    print "No kernel packages to remove.\n";
 }
 
