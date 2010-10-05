@@ -1,0 +1,6 @@
+I have a netbook, and I run Ubuntu on it.  
+
+I didn't like the long list of older kernels in the GRUB menu and
+I wanted to clean them up, and decided to automate it.
+
+R. Sean O'Leary - Tue Oct  5 16:08:28 EDT 2010
