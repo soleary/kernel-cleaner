@@ -7,11 +7,9 @@ my $list_command   = 'dpkg --get-selections | grep install | grep linux-image | 
 my $victim_command = 'dpkg --get-selections | grep install | grep linux | grep %s | cut -f1';
 
 my @installed_kernels = split /\n/, qx/$list_command/;
-
 my $version_regex = qr/^linux.+(\d+\.\d+\.\d+-\d+)/;
 
 my @victims;
-
 foreach my $package (@installed_kernels) {
     push @victims, $package =~ /$version_regex/;
 }
